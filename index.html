@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Constance T. Ingosi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<!-- Initialize EmailJS -->
+<script>
+  (function() {
+    emailjs.init("dMF-abkbmHIiBFE84"); // ✅ Replace with your actual Public Key
+  })();
+</script>
+
+<!-- Send Email Function -->
+<script>
+  function sendEmail(event) {
+    event.preventDefault();
+
+    emailjs.sendForm('service_9swcs5h', 'template_dsz2g0o', '#orderFormElement')
+      .then(() => {
+        alert("✅ Order sent successfully!");
+        document.getElementById("orderFormElement").reset();
+        closeOrderForm();
+      }, (error) => {
+        alert("❌ Failed to send order. Error: " + JSON.stringify(error));
+        console.error("EmailJS Error:", error);
+      });
+  }
+
+  // Attach form submit listener
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('orderFormElement');
+    if (form) {
+      form.addEventListener('submit', sendEmail);
+    }
+  });
+</script>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0077b6, #00ff9d);
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+
+    body.dark-theme {
+      background: #1a1a2e;
+      color: #eee;
+    }
+
+    .container {
+      max-width: 1000px;
+      padding: 2rem;
+      margin: auto;
+    }
+
+    header {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .profile-pic-wrapper {
+      width: 180px;
+      height: 180px;
+      border: 5px double hotpink;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 0 6px white, 0 0 0 10px hotpink;
+    }
+
+    .profile-pic-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .settings, .menu-toggle {
+      position: fixed;
+      top: 20px;
+      z-index: 1001;
+    }
+
+    .settings {
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .menu-toggle {
+      left: 20px;
+      background: hotpink;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+
+    .settings button {
+      background: hotpink;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .clock {
+      background: white;
+      color: black;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    body.dark-theme .clock {
+      background: #333;
+      color: white;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      background: linear-gradient(to right, red, hotpink);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .sub-title {
+      font-size: 1.5rem;
+      color: white;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 250px;
+      background-color: white;
+      box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      padding-top: 2rem;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px 25px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+
+    section {
+      margin-bottom: 3em;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+
+    .gallery img, .projects img {
+      max-width: 300px;
+      width: 100%;
+      border-radius: 10px;
+      margin: 10px;
+      border: 3px solid black;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .socials {
+      background: #fff0f5;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 15px;
+      border: 5px double hotpink;
+    }
+
+    .socials a {
+      margin: 0.5em;
+      display: inline-block;
+      color: #e91e63;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2em;
+      font-size: 1rem;
+      background: linear-gradient(to right, #0077b6, #00ff9d);
+      color: #fff;
+    }
+
+
+    /* Open Form Button */
+    .order-btn {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin: 2rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .order-btn:hover {
+      background: #d81b60;
+    }
+
+    /* Overlay */
+    .order-form-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow: auto;
+      padding: 1rem;
+    }
+
+    .order-form-overlay.active {
+      display: flex;
+    }
+
+    /* Form Container */
+    .order-form {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .order-form h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .order-form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .order-form input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    .order-form input:focus {
+      border-color: #e91e63;
+      outline: none;
+    }
+
+    .row-2-fields {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .row-2-fields > div {
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 1.5rem;
+    }
+
+    .form-actions button {
+      flex: 1;
+      padding: 12px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-actions button[type="submit"] {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .form-actions button[type="submit"]:hover {
+      background-color: #43a047;
+    }
+
+    .form-actions button[type="button"] {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .form-actions button[type="button"]:hover {
+      background-color: #e53935;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      .sub-title {
+        font-size: 1.2rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .profile-pic-wrapper {
+        width: 140px;
+        height: 140px;
+      }
+
+      .gallery img, .projects img {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .order-form {
+        padding: 1rem;
+      }
+
+      .form-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .order-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- Settings & Clock -->
+  <div class="settings">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+    <div class="clock" id="clock">--:--:--</div>
+  </div>
+3<!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="#about">About Me</a>
+    <a href="#projects">Projects</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <a href="#resume">Resume</a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="profile-pic-wrapper">
+      <img src="C:\Users\USER\Desktop\Connie\1000091619.jpg" alt="Profile Picture">
+    </div>
+    <h1>Constance T. Ingosi</h1>
+    <div class="sub-title">Crotchet Artist / Counsellor / Home-based Care Specialist</div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hello, I'm Constance T. Ingosi. I'm passionate about community service, creativity, and wellness.My work spans the domain of art and care-specifically in crotchet artistry,home-based caregiving and counselling.</p>
+      <h3>Crotcheting</h3>
+      <p>Crotcheting is more than just yarn and needles. It is a creative and therapeutic form of art.Through intricate loops and patterns, I create beautiful handmade items such as clothing, home decor and accessories. Each reflects a unique blend of skill,patience and imagination. My crotchet work serves both functional and aesthetic purposes and I often design customized items for individuals or special events. .</p>
+      <h3>Home-BasedCare</h3>
+      <p>Home-based care involves providing essential medical and personal support to individuals in the comfort of their homes. I assist patients with chronic illnesses, disabilities or recovery needs by ensuri g they receive compasssionate and consistent care. This includes helping with daily activities, medication reminders, emotional support and maintaining a safe and nurturing home environment.</p>
+      <h3>Counseling</h3>
+      <p>Counselling is a vital service that empowers individuals to cope with life's challenges, improve mental health and make positive life changes where clients can expess themselves freely. My approach focuses on active listening, empathy and tailored strategies to suport emotional healing and personal growth.</p>
+    </section>
+
+    <section id="projects" class="projects">
+      <h2>Projects</h2>
+      <p>Here are some of my creative and care-based initiatives. (Images to be added)</p>
+      <button class="order-btn" onclick="openOrderForm()">Place Order</button>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <h2>Gallery</h2>
+      <p>A curated showcase of my artistic creations. (Images to be added)</p>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Email: <a href="mailto:tunganiconstance@gmail.com">tunganiconstance@gmail.com</a></p>
+      <p>Phone: <a href="tel:+254713948884">+254713948884</a></p>
+    </section>
+
+    <section class="socials">
+      <h2>Connect With Me</h2>
+      <a href="https://www.facebook.com/yourusername" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="https://www.instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+      <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="https://www.pinterest.com/yourusername" target="_blank"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+      <a href="https://wa.me/254713948884?text=Hello%2C%20I%27m%20interested%20in%20your%20services." target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://www.tiktok.com/@yourusername" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+    </section>
+<a href="gallery.html">Go to Gallery</a>
+    <section id="resume">
+      <h2>Resume</h2>
+
+      <a href="resume.pdf" download>Download My Resume (PDF)</a>
+      <p><i>All rights reserved. No part of this publication may be reproduced without written permission.</i></p>
+    </section>
+  </div>
+<!-- Trigger Button -->
+<button class="order-btn" onclick="openOrderForm()">Place Order</button>
+
+<!-- Order Form -->
+<div class="order-form-overlay" id="orderForm">
+  <div class="order-form">
+    <h2>Place Your Order</h2>
+    <form id="orderFormElement">
+      
+      <!-- Row for Email + Phone -->
+      <div class="row-2-fields">
+        <div>
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+
+      <label for="items">Number of Items:</label>
+      <input type="number" id="items" name="items" required>
+      
+      <label for="time">Time of Order:</label>
+      <input type="time" id="time" name="time" required>
+      
+      <label for="price">Price per Item (KES):</label>
+      <input type="number" id="price" name="price" required>
+      
+      <label for="date">Date of Delivery:</label>
+      <input type="date" id="date" name="date" required>
+      
+      <label for="region">Region/Country for Delivery:</label>
+      <input type="text" id="region" name="region" required>
+
+      <div class="form-actions">
+        <button type="submit">Submit Order</button>
+        <button type="button" onclick="closeOrderForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Constance T. Ingosi — All Rights Reserved.
+    <p><i>Published by Scholastica A. Juma</i></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-theme");
+    }
+
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("open");
+    }
+
+    function openOrderForm() {
+      document.getElementById("orderForm").classList.add("active");
+    }
+
+    function closeOrderForm() {
+      document.getElementById("orderForm").classList.remove("active");
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const clock = document.getElementById("clock");
+      clock.textContent = now.toLocaleTimeString();
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock(); // Run once on load
+  </script>
+
+</body>
+</html>
